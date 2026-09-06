@@ -1,0 +1,34 @@
+﻿diff --git a/src/server.c b/src/server.c
+index e1a91ec..1859d31 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -6,6 +6,7 @@
+ #include <string.h>
+ #include <sys/wait.h>
+ #include <wlr/backend/headless.h>
++#include <wlr/backend/anland.h>
+ #include <wlr/backend/multi.h>
+ #include <wlr/config.h>
+ #include <wlr/render/allocator.h>
+@@ -411,7 +412,8 @@ handle_renderer_lost(struct wl_listener *listener, void *data)
+ 		return;
+ 	}
+ 
+-	struct wlr_allocator *allocator =
++	struct wlr_allocator *allocator = getenv("ANLAND_SOCKET") ?
++		wlr_anland_allocator_create(server.backend, renderer) :
+ 		wlr_allocator_autocreate(server.backend, renderer);
+ 	if (!allocator) {
+ 		wlr_log(WLR_ERROR, "Unable to create allocator");
+@@ -598,8 +600,9 @@ server_init(void)
+ 	 * the renderer and the backend. It handles the buffer creation,
+ 	 * allowing wlroots to render onto the screen
+ 	 */
+-	server.allocator = wlr_allocator_autocreate(
+-		server.backend, server.renderer);
++	server.allocator = getenv("ANLAND_SOCKET") ?
++		wlr_anland_allocator_create(server.backend, server.renderer) :
++		wlr_allocator_autocreate(server.backend, server.renderer);
+ 	if (!server.allocator) {
+ 		wlr_log(WLR_ERROR, "unable to create allocator");
+ 		exit(EXIT_FAILURE);
