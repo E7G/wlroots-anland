@@ -1,5 +1,10 @@
 # wlroots
 
+## Anland backend
+
+This tree includes the opt-in Anland Android dma-buf backend. See
+[`README.anland.md`](README.anland.md) for build and labwc integration.
+
 > ### ⚠️ Migrated to gitlab.freedesktop.org
 >
 > This project has [migrated to gitlab.freedesktop.org](https://gitlab.freedesktop.org/wlroots/wlroots).
