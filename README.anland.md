@@ -50,6 +50,10 @@ is sufficient. For labwc versions which explicitly create the allocator,
 apply [`patches/labwc-anland.patch`](patches/labwc-anland.patch); it selects
 `wlr_anland_allocator_create()` when `ANLAND_SOCKET` is set.
 
+The maintained labwc integration is also published at
+[`E7G/labwc`](https://github.com/E7G/labwc/tree/anland-backend), branch
+`anland-backend`.
+
 ## Protocol source
 
 `backend/display_producer.[ch]`, `backend/socket_utils.[ch]`, and
